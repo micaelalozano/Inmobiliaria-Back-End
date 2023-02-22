@@ -13,33 +13,39 @@ router.post("/", (req, res) => {
     precio,
     ubicacion,
     imagen,
-  }).then((data) => {
-    res.status(201).send(data);
-  });
+  })
+    .then((data) => {
+      res.status(201).send(data);
+    })
+    .catch((error) => console.log(error));
 });
 
 //Buscar todas las propiedades:
 router.get("/", (req, res) => {
   const { page } = req.query;
 
-  Propiedades.findAndCountAll({ limit: 6, offset: page * 6 }).then((data) => {
-    res
-      .status(200)
-      .send({ content: data.rows, totalPages: Math.ceil(data.count / 6) });
-  });
+  Propiedades.findAndCountAll({ limit: 6, offset: page * 6 })
+    .then((data) => {
+      res
+        .status(200)
+        .send({ content: data.rows, totalPages: Math.ceil(data.count / 6) });
+    })
+    .catch((error) => console.log(error));
 });
 
 //Buscar las propiedades por ID:
 router.get("/:id", (req, res) => {
   const { id } = req.params;
 
-  Propiedades.findByPk(id).then((data) => {
-    res.status(200).send(data);
-  });
+  Propiedades.findByPk(id)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => console.log(error));
 });
 
 //Buscar las propiedades por query:
-router.get("/search?q=/:q", (req, res) => {
+/*{router.get("/search?q=/:q", (req, res) => {
   const { q } = req.query;
   Propiedades.findAll({
     where: {
@@ -48,7 +54,7 @@ router.get("/search?q=/:q", (req, res) => {
   }).then((data) => {
     res.status(200).send(data);
   });
-});
+});}*/
 
 //Actualizar propiedades:
 router.put("/:id", (req, res) => {
@@ -59,18 +65,22 @@ router.put("/:id", (req, res) => {
   Propiedades.update(
     { disponibilidad, direccion, descripcion, precio, ubicacion, imagen },
     { where: { id } }
-  ).then((data) => {
-    res.status(200).send(data);
-  });
+  )
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => console.log(error));
 });
 
 //Eliminar propiedades:
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
-  Propiedades.destroy({ where: { id } }).then((data) => {
-    res.send("Eliminado");
-  });
+  Propiedades.destroy({ where: { id } })
+    .then((data) => {
+      res.send("Eliminado");
+    })
+    .catch((error) => console.log(error));
 });
 
 module.exports = router;
