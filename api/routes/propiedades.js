@@ -17,7 +17,9 @@ router.post("/", (req, res) => {
     .then((data) => {
       res.status(201).send(data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 //Buscar todas las propiedades:
@@ -30,7 +32,9 @@ router.get("/", (req, res) => {
         .status(200)
         .send({ content: data.rows, totalPages: Math.ceil(data.count / 6) });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 //Buscar las propiedades por ID:
@@ -41,7 +45,9 @@ router.get("/:id", (req, res) => {
     .then((data) => {
       res.status(200).send(data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 //Buscar las propiedades por query:
@@ -69,7 +75,9 @@ router.put("/:id", (req, res) => {
     .then((data) => {
       res.status(200).send(data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 //Eliminar propiedades:
@@ -80,7 +88,9 @@ router.delete("/:id", (req, res) => {
     .then((data) => {
       res.send("Eliminado");
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 module.exports = router;
